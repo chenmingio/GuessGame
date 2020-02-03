@@ -78,11 +78,6 @@ def get_random_words():
     return word
 
 
-@app.route('/')
-def sessions():
-    return render_template('game_session.html')
-
-
 def send_game_status(room):
     for (game, name) in SID_DICT.values():
         if game.room == room:
