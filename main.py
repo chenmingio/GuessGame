@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, request, send_from_directory
 from flask_socketio import SocketIO, join_room, leave_room, emit, send
 import random
 import json
@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret123!'
-socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")
+socketio = SocketIO(app, static_url_path='' ,cors_allowed_origins="http://localhost:3000")
 
 SID_DICT = {} # SID: (Game game, String name)
  
@@ -168,6 +168,10 @@ def handle_answer(answer):
         send_rejoin_msg()
         print(f"[receive answer] search game failed. Asked client to rejoin the room")
 
+
+@app.route('/')
+def root():
+    return app.send_static_file('index.html')
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
