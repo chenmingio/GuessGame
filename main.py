@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret123!'
-socketio = SocketIO(app, static_url_path='' ,cors_allowed_origins="http://localhost:3000")
+socketio = SocketIO(app, static_url_path='')
 
 SID_DICT = {} # SID: (Game game, String name)
  
